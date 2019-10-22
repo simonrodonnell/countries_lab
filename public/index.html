@@ -1,15 +1,42 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
-  <head>
-    <meta charset="utf-8">
-    <title>Countries Lab</title>
-    <link rel="stylesheet" href="./css/styles.css">
-    <script src="./js/bundle.js"></script>
-  </head>
-  <body>
-    <div id="app">
-      <h3>Countries</h3>
-      <p v-for="country in allCountries">{{ country.name }}</p>
+<head>
+  <meta charset="utf-8">
+  <title>Countries Lab</title>
+  <link rel="stylesheet" href="./css/styles.css">
+  <script src="./js/bundle.js"></script>
+</head>
+<body>
+  <div id="app">
+    <h3>Global Population</h3>
+    <p> {{ globalPopulation }} </p>
+    <!-- <h3>All Countries</h3>
+    <p v-for="country in allCountries">{{ country.name }}</p> -->
+    <form v-on:submit.prevent="displayCountry">
+      <input type="text" name="" v-model="searchCountry">
+      <input type="submit" name="" value="Search for country">
+    </form>
+
+    <h1  v-if="selectedCountry" >{{selectedCountry.name}}</h1>
+    <img v-if="selectedCountry" :src="selectedCountry.flag" alt="Flag" class="flag">
+
+    <div>
+      <p>neighbouring countries</p>
     </div>
-  </body>
+
+    <hr>
+    <form v-on:submit.prevent="addToFavouriteCountry">
+      <input type="text" name="" v-model="addCountry">
+      <input type="submit" name="" value="Add to Favourite Countries">
+    </form>
+
+    <hr>
+    <h1>Favourite Countries</h1>
+    <div class="favourite-countries" v-if="favouriteCountries" v-for="country in favouriteCountries">
+      <h1>{{country.name}}</h1>
+      <img :src="country.flag" alt="Flag" class="flag">
+    </div>
+
+  </div>
+</body>
 </html>
